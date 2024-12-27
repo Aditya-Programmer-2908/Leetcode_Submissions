@@ -1,0 +1,44 @@
+class Solution {
+public:
+    char stk[10000];
+    int i = 0;
+
+    void push(char a) {
+        stk[i++] = a;
+    }
+
+    char pop() {
+        return stk[--i];
+    }
+
+    char top() {
+        return stk[i - 1];
+    }
+
+    bool empty() {
+        return i == 0;
+    }
+
+    bool isValid(string s) {
+        int n = s.length();
+        if (n % 2 != 0) {
+            return false;
+        }
+
+        for (int j = 0; j < n; j++) {
+            if (s[j] == '(' || s[j] == '{' || s[j] == '[') {
+                push(s[j]);
+            } else {
+                if (empty() || 
+                   (s[j] == ')' && top() != '(') ||
+                   (s[j] == '}' && top() != '{') ||
+                   (s[j] == ']' && top() != '[')) {
+                    return false;
+                }
+                pop(); 
+            }
+        }
+
+        return empty();
+    }
+};

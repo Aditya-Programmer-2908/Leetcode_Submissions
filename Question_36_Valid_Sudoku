@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                char chk=board[i][j];
+                if(chk=='.')continue;
+                for (int l = j + 1; l < 9; l++) {
+                    if (chk == board[i][l]) {
+                        return false;
+                    }
+                }
+
+                for (int k = i + 1; k < 9; k++) {
+                    if (chk == board[k][j]) {
+                        return false;
+                    }
+                }
+
+                int subgridRow = (i / 3) * 3;
+                int subgridCol = (j / 3) * 3;
+                for (int row = subgridRow; row < subgridRow + 3; row++) {
+                    for (int col = subgridCol; col < subgridCol + 3; col++) {
+                        if (row == i && col == j) continue; 
+                        if (chk == board[row][col]) {
+                            return false;
+                        }
+                    }
+                }
+
+            }
+        }
+        return true;
+    }
+};

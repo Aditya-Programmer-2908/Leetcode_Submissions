@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool doesValidArrayExist(vector<int>& derived) {
+        int n = derived.size();
+        int j=0;
+        for(int i=0;i<n;i++){
+            j=j^derived[i];
+        }
+        if(j==0){
+            return true;
+        } 
+        return false;
+    }
+};
